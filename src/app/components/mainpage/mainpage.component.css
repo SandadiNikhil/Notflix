@@ -1,0 +1,98 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.header .logo img {
+  width: 150px;
+  margin-left: 80px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-right: 60px;
+}
+
+.auth-buttons .btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-buttons .btn-sign-in {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.auth-buttons .btn-sign-in:hover {
+  background-color: white;
+  color: #e50914;
+}
+
+.auth-buttons .btn-register {
+  background-color: #e50914;
+  color: white;
+}
+
+.auth-buttons .btn-register:hover {
+  background-color: #f40612;
+}
+
+.content {
+  text-align: center;
+  margin-top: 200px;
+  color: white;
+  padding: 0 20px;
+}
+
+.content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.content h2 {
+  font-size: 1.5rem;
+  margin: 20px 0;
+}
+
+.content form {
+  margin-top: 20px;
+}
+
+.content form input {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  margin-right: 10px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: transparent;
+  color: white;
+}
+
+.content form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.content form button:hover {
+  background-color: #f40612;
+}

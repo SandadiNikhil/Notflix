@@ -1,0 +1,16 @@
+<form [formGroup]="formGroup">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" required />
+      <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
+        Username is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>TMDB API Key</mat-label>
+      <input matInput formControlName="tmdb" required />
+      <mat-error *ngIf="formGroup.get('tmdb')?.hasError('required')">
+        TMDB API Key is required
+      </mat-error>
+    </mat-form-field>
+  </form>

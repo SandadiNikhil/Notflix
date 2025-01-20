@@ -1,0 +1,14 @@
+<div class="page-3">
+    <div class="sign-up">
+      <span>STEP 3 OF 3</span>
+      <h1>Choose Your Plan</h1>
+      <ul>
+        <li *ngFor="let plan of plans" (click)="selectedPlan = plan" [class.selected]="selectedPlan === plan">
+          {{ plan }}
+        </li>
+      </ul>
+  
+      <button type="button" (click)="completeRegistration()">Finish</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,51 @@
+<div class="movie-details-container">
+<div *ngIf="movieDetails" class="container">
+  <div
+    class="image"
+    [style.background-image]="
+      'url(https://image.tmdb.org/t/p/w500' + movieDetails.backdrop_path + ')'
+    "
+  ></div>
+  <div class="content">
+    <h1>{{ movieDetails.original_title }}</h1>
+
+    <div class="movie-info">
+      <p class="rating">
+        {{ movieDetails.vote_average }}
+      </p>
+      <p class="runtime">{{ movieDetails.runtime }} mins</p>
+      <div class="genres">
+        <div *ngFor="let genre of movieDetails.genres">
+          <span class="genre">{{ genre.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="overview">{{ movieDetails.overview }}</p>
+
+    <p class="release-date">{{ movieDetails.release_date | date }}</p>
+
+    <div class="buttons">
+      <button (click)="getVideo(movieDetails.id)" class="play-button">
+        Play now
+      </button>
+      <button (click)="getVideo(movieDetails.id)" class="trailer-button">
+        Trailer
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isPlayerVisible" class="youtube-modal" (click)="closePlayer()">
+  <div class="youtube-player-container" (click)="$event.stopPropagation()">
+    <iframe
+      *ngIf="isPlayerVisible"
+      width="560"
+      height="315"
+      [src]="getVideoUrl()"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
+</div>

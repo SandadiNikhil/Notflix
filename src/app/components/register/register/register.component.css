@@ -1,0 +1,21 @@
+.register-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Adjust column widths as needed */
+  grid-template-rows: 1fr;
+  gap: 20px;
+  min-height: 100vh;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.background-section {
+  background-image: url('/assets/images/netflix.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+}

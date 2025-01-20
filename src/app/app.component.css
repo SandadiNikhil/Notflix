@@ -1,0 +1,77 @@
+  .background-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .background-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../public/assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(40%);
+    z-index: -1; 
+  }
+  
+  .header {
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px; 
+    padding: 0 auto;
+  }
+  
+  .logo {
+    background-image: url("../../public/assets/netflix.svg");
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100px; 
+    width: 170px; 
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    padding: 0;
+    display: flex; 
+    align-items: center;
+  }
+  
+  li {
+    margin-left: 20px; 
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .sign-in {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button[type="submit"] {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  

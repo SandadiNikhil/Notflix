@@ -1,0 +1,44 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-info {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  align-items: center;
+}
+
+.logo {
+  width: 9.25rem;
+  height: 2.5rem;
+  color: red;
+  fill: currentColor;
+  display: block;
+  padding: 20px;
+  margin-left: 50px;
+}
+
+.sign-in {
+  margin: 20px;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 7px;
+  font-weight: 500;
+  padding: 10px;
+  font-size: 0.875rem;
+  height: 35px;
+  margin-right: 50px;
+}
+
+.sign-in:hover {
+  cursor: pointer;
+  background-color: rgb(215, 19, 19);
+}
+
+.home{
+  cursor: pointer;
+}

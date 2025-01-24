@@ -26,8 +26,12 @@ const routes: Routes = [
     path: 'movieList',
     component: MovieListComponent,
     canActivate: [AuthGuard],
-  }, 
-  { path: 'movieDetails', component: MovieDetailsComponent },
+  },
+  {
+    path: 'movieDetails', 
+    component: MovieDetailsComponent, 
+    canActivate: [AuthGuard],
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: MainpageComponent },
 ];
@@ -36,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -37,7 +37,7 @@
 
 
 
-
+<!-- 
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="getFormGroup('step1')">
     <ng-template matStepLabel>Account Info</ng-template>
@@ -73,4 +73,58 @@
       <button mat-button (click)="onSubmit()">Submit</button>
     </div>
   </mat-step>
-</mat-horizontal-stepper>
+</mat-horizontal-stepper> -->
+
+
+
+
+
+<div class="register-container">
+  <div class="form-section">
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="getFormGroup('step1')">
+        <ng-template matStepLabel>Account Info</ng-template>
+        <app-step1 [formGroup]="getFormGroup('step1')"></app-step1>
+        <div class="step-buttons">
+          <p> </p>
+          <button mat-raised-button color="primary" matStepperNext (click)="goToNextStep()">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="getFormGroup('plan')">
+        <ng-template matStepLabel>Select Plan</ng-template>
+        <app-plan [formGroup]="getFormGroup('plan')"></app-plan>
+        <div class="step-buttons">
+          <button mat-raised-button color="warn" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="goToNextStep()">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="getFormGroup('step2')">
+        <ng-template matStepLabel>Profile</ng-template>
+        <app-step2 [formGroup]="getFormGroup('step2')"></app-step2>
+        <div class="step-buttons">
+          <button mat-raised-button color="warn" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="goToNextStep()">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="getFormGroup('step3')">
+        <ng-template matStepLabel>Review</ng-template>
+        <app-step3 [formGroup]="registrationForm"></app-step3>
+        <!-- <app-step3 [formGroup]="getFormGroup('step3')"></app-step3> -->
+        <div class="step-buttons">
+          <button mat-raised-button color="warn" matStepperPrevious>Back</button>
+          <button mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+
+  <!-- <div class="background-section">
+    <div class="overlay">
+      <h1>Welcome to Notflix</h1>
+      <p>Stream your favorite shows anytime, anywhere.</p>
+    </div>
+  </div>
+</div> -->

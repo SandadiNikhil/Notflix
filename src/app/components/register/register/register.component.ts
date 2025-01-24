@@ -118,7 +118,9 @@ export class RegisterComponent implements OnInit {
     } else {
       console.error('Form is not valid');
     }
+    console.log('Current Registration Form Values:', this.registrationForm.value);
   }
+  
   
   goToNextStep() {
     if (this.stepper) {

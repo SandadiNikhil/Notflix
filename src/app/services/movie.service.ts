@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 
 export class MovieService {
   private baseUrl = 'https://api.themoviedb.org/3/';
-  private apiKey = '09ede2b2422b2a4d970701cac92ebd60'; // Replace with your actual API key
+  private apiKey = '09ede2b2422b2a4d970701cac92ebd60';
   private authServerPath = 'http://localhost:5566/api/v1/auth';
 
   private signupData: SignupData = {};
@@ -119,7 +119,6 @@ export class MovieService {
     );
   }
 
-  // Centralized error handling
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
 
@@ -136,7 +135,6 @@ export class MovieService {
     return throwError(() => new Error(errorMessage));
   }
 
-  // Example of caching (can be expanded)
   private movieCache: { [page: number]: MovieResponse } = {};
 
   getCachedMovies(page: number): Observable<MovieResponse> {
@@ -150,10 +148,8 @@ export class MovieService {
     );
   }
 
-  // Search functionality with debouncing
   searchMovies(query: string, page: number = 1): Observable<MovieResponse> {
     if (!query.trim()) {
-      // Return empty results if the query is empty
       return of({ page: 1, results: [], total_pages: 0, total_results: 0 });
     }
 

@@ -1,4 +1,4 @@
-<div class="page-3">
+<!-- <div class="page-3">
     <div class="sign-up">
       <span>STEP 3 OF 3</span>
       <h1>Choose Your Plan</h1>
@@ -10,5 +10,41 @@
   
       <button type="button" (click)="completeRegistration()">Finish</button>
     </div>
+  </div> -->
+
+
+<!-- 
+<div class="review-container">
+  <p><strong>Username:</strong> {{ reviewData.username }}</p>
+  <p><strong>Email:</strong> {{ reviewData.email }}</p>
+  <p><strong>Password:</strong> {{ '•'.repeat(reviewData.password?.length || 0) }}</p>
+  <p><strong>Plan:</strong> {{ reviewData.plan }}</p>
+  <p><strong>TMDB API Key:</strong> {{ reviewData.tmdbApiKey }}</p>
+</div> -->
+
+
+<div class="review-container">
+  <div class="review-details">
+    <div class="review-item">
+      <span class="label">Username:</span>
+      <span class="value">{{ reviewData.username }}</span>
+    </div>
+    <div class="review-item">
+      <span class="label">Email:</span>
+      <span class="value">{{ reviewData.email }}</span>
+    </div>
+    <div class="review-item">
+      <span class="label">Password:</span>
+      <span class="value">{{ '•'.repeat(reviewData.password.length) }}</span>
+    </div>
+    <div class="review-item">
+      <span class="label">Plan:</span>
+      <span class="value">{{ reviewData.plan }}</span>
+    </div>
+    <div class="review-item">
+      <span class="label">TMDB API Key:</span>
+      <span class="value">{{ reviewData.tmdbApiKey }}</span>
+    </div>
   </div>
-  
+</div>
+

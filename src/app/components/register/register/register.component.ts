@@ -84,7 +84,6 @@ export class RegisterComponent implements OnInit {
     if (formGroup instanceof FormGroup) {
       return formGroup;
     } else {
-      // Handle the error or throw an exception
       throw new Error(`FormGroup with name ${formGroupName} not found.`);
     }
   }

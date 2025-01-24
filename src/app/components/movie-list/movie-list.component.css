@@ -4,16 +4,23 @@
   } */
 
   .list{
-    padding: 0%;
+    padding: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 40px;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .item {
+    flex: 0 1 calc(5% - 20px); 
+    margin: 1px; 
   }
 
   .container {
     background-color: #000; 
     min-height: 100vh;
     padding: 20px; 
+    margin-bottom: 20px;
+
   }

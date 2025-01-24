@@ -19,7 +19,7 @@
   </div>
 
   <div class="user-info" *ngIf="isAuthenticated">
-    <span class="username">{{ username }}</span>
+    <span class="username">{{ username || 'Guest'}}</span>
     <button (click)="signOut()">Sign Out</button>
   </div>
 

@@ -11,14 +11,14 @@
     <div class="title">{{ movie.original_title }}</div>
     <div class="content">
       <span class="tag year">{{ movie.release_date | date : "yyyy" }}</span>
-      <span class="tag lang"><strong>{{ movie.original_language | uppercase }}</strong></span>
+      <span class="tag lang">{{ movie.original_language | uppercase }}</span>
       <span class="tag rating">{{ movie.vote_average | number: '1.2-2' }}</span>
 
     </div>
 
     <p class="overview">{{ movie.overview }}</p>
     <button (click)="movieDetails(movie)" class="details-btn">
-      More Details
+      More Details..
     </button>
   </div>
 </div>

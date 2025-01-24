@@ -1,16 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-nav-bar',
-//   standalone: true,
-//   templateUrl: './nav-bar.component.html',
-//   styleUrls: ['./nav-bar.component.css']
-// })
-// export class NavBarComponent {
-//   // Add navigation logic here (e.g., links to different pages)
-// }
-
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -23,6 +10,7 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
 })
+
 export class NavBarComponent implements OnInit {
   username: string | null = null;
   isAuthenticated: boolean = false;
@@ -32,8 +20,11 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isAuthenticated = isAuthenticated;
+      console.log('isAuthenticated:', isAuthenticated);
       if (isAuthenticated) {
         this.username = this.authService.getSignupData('username');
+        this.username = this.authService.getCurrentUser(); 
+        console.log('Logged-in username:', this.username);
       } else {
         this.username = null;
       }
@@ -41,7 +32,7 @@ export class NavBarComponent implements OnInit {
   }
 
   signOut(): void {
-    this.authService.setAuthenticated(false); // Update the authentication status in your service
+    this.authService.setAuthenticated(false); 
     this.authService.addSignupData('email', '');
     this.authService.addSignupData('password', '');
     this.authService.addSignupData('username', '');

@@ -1,11 +1,14 @@
 <div class="movie-details-container">
 <div *ngIf="movieDetails" class="container">
-  <div
-    class="image"
-    [style.background-image]="
-      'url(https://image.tmdb.org/t/p/w500' + movieDetails.backdrop_path + ')'
-    "
-  ></div>
+ 
+  <div class="image">
+    <img
+      src="https://image.tmdb.org/t/p/w500{{ movieDetails.backdrop_path }}"
+      alt="{{ movieDetails.original_title }}"
+      class="movie-img"
+    />
+  </div>
+
   <div class="content">
     <h1>{{ movieDetails.original_title }}</h1>
 
@@ -26,10 +29,10 @@
     <p class="release-date">{{ movieDetails.release_date | date }}</p>
 
     <div class="buttons">
-      <button (click)="getVideo(movieDetails.id)" class="play-button">
+      <button (click)="getVideo(movieDetails.id, 'play')" class="play-button">
         Play now
       </button>
-      <button (click)="getVideo(movieDetails.id)" class="trailer-button">
+      <button (click)="getVideo(movieDetails.id, 'trailer')" class="trailer-button">
         Trailer
       </button>
     </div>
@@ -47,5 +50,6 @@
       allowfullscreen
     ></iframe>
   </div>
+
 </div>
 </div>

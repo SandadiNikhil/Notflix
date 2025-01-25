@@ -91,22 +91,30 @@ export class MovieService {
       .subscribe(() => this.loadingSubject$.next(false));
   }
 
-  getMovieDetails(id: number): void {
-    this.loadingSubject$.next(true);
-    this.errorSubject$.next(null);
-    this.movieDetailsSubject$.next(null);
+  // getMovieDetails(id: number): void {
+  //   this.loadingSubject$.next(true);
+  //   this.errorSubject$.next(null);
+  //   this.movieDetailsSubject$.next(null);
 
-    const url = `${this.baseUrl}movie/${id}?api_key=${this.apiKey}`;
+  //   const url = `${this.baseUrl}movie/${id}?api_key=${this.apiKey}`;
 
-    this.http
-      .get<movieDetails>(url)
-      .pipe(
-        tap((res) => this.movieDetailsSubject$.next(res)),
-        catchError((error) => this.handleError(error))
-      )
-      .subscribe(() => this.loadingSubject$.next(false));
+  //   this.http
+  //     .get<movieDetails>(url)
+  //     .pipe(
+  //       tap((res) => this.movieDetailsSubject$.next(res)),
+  //       catchError((error) => this.handleError(error))
+  //     )
+  //     .subscribe(() => this.loadingSubject$.next(false));
+  // }
+
+  getMovieDetails(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}`);
   }
-
+  
+  getCastDetails(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}movie/${id}/credits?api_key=${this.apiKey}`);
+  }
+  
   getVideo(id: number): Observable<any> {
     this.loadingSubject$.next(true);
     this.errorSubject$.next(null);
@@ -129,7 +137,6 @@ export class MovieService {
       // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-
     this.errorSubject$.next(errorMessage);
     this.loadingSubject$.next(false);
     return throwError(() => new Error(errorMessage));
@@ -141,7 +148,6 @@ export class MovieService {
     if (this.movieCache[page]) {
       return of(this.movieCache[page]);
     }
-
     const url = `${this.baseUrl}popular?api_key=${this.apiKey}&page=${page}`;
     return this.http.get<MovieResponse>(url).pipe(
       tap((res) => (this.movieCache[page] = res))

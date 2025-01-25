@@ -35,90 +35,59 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  // getMovieDetails(id: number | null) {
-  //   if (id) {
-  //     this.movieService.getMovieDetails(id);
-  //     this.movieService.movieDetails$.subscribe((res) => {
-  //       this.movieDetails = res;
-  //       console.log('this.movieDetails', this.movieDetails);
-  //     });
-  //   }
-  // }
-
   getMovieDetails(id: number | null) {
     if (id) {
-      this.movieService.getMovieDetails(id);
-      this.movieService.movieDetails$.subscribe((res) => {
+      this.movieService.getMovieDetails(id).subscribe((res: any) => {
         if (res) {
           this.movieDetails = res;
-          console.log('Movie Details:', this.movieDetails);
-        } else {
-          console.error('No movie details found for ID:', id);
+          this.movieService.getCastDetails(id).subscribe((castResponse: any) => {
+            if (castResponse && castResponse.cast) {
+              this.movieDetails = {
+                ...(this.movieDetails as movieDetails), 
+                actors: castResponse.cast.slice(0, 10),
+              };
+              
+            }
+          });
         }
       });
-    } else {
-      console.error('Invalid movie ID:', id);
     }
   }
-
-  // getVideo(id: number | null) {
-  //   if (id) {
-  //     this.movieService.getVideo(id).subscribe((res: any) => {
-  //       console.log('Get Video Info', res);
-  //       this.videoDetails = res.results;
-
-  //       console.log('this.videoDetails', this.videoDetails);
-
-  //       if (this.videoDetails) {
-  //         this.videoInfo = this.videoDetails.find(() => true);
-  //         console.log('firstObject', this.videoInfo.key);
-  //         this.isPlayerVisible = true;
-  //       }
-  //     });
-  //   }
-  // }
 
   getVideo(id: number | null, type: 'play' | 'trailer') {
     if (id !== null) {
       this.movieService.getVideo(id).subscribe((res: any) => {
-        console.log('Get Video Info', res);
+        console.log('Get Video Info:', res);
+  
         this.videoDetails = res.results;
   
-        if (this.videoDetails) {
-          this.videoInfo = this.videoDetails.find(() => true);
-          console.log('firstObject', this.videoInfo.key);
+        if (this.videoDetails && this.videoDetails.length > 0) {
+          this.videoInfo = this.videoDetails.find(
+            (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+          );
   
-          if (type === 'play') {
-            console.log('Playing the movie...');
-            this.isPlayerVisible = true;
-          } else if (type === 'trailer') {
-            console.log('Showing the trailer...');
-            this.isPlayerVisible = true;
+          if (this.videoInfo) {
+            console.log('Found Video Key:', this.videoInfo.key);
+  
+            if (type === 'play' || type === 'trailer') {
+              this.isPlayerVisible = true;
+            }
+          } else {
+            console.warn('No trailer found for this movie.');
           }
+        } else {
+          console.warn('No videos available for this movie.');
         }
       });
     }
   }
-
-  closePlayer() {
-    this.isPlayerVisible = false;
-  }
-
+  
   private sanitizeUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  // getVideoUrl(): SafeResourceUrl {
-  //   if (this.videoInfo) {
-  //     return this.sanitizeUrl(
-  //       `https://www.youtube.com/embed/${this.videoInfo.key}`
-  //     );
-  //   }
-  //   return '';
-  // }
-
   getVideoUrl(): SafeResourceUrl {
-    if (this.videoInfo) {
+    if (this.videoInfo && this.videoInfo.key) {
       return this.sanitizeUrl(
         `https://www.youtube.com/embed/${this.videoInfo.key}`
       );
@@ -128,66 +97,8 @@ export class MovieDetailsComponent implements OnInit {
     }
   }
 
+  closePlayer() {
+    this.isPlayerVisible = false;
+  }
+
 }
-
-
-
-// @Component({
-//   selector: 'app-movie-details',
-//   standalone: false,
-
-//   templateUrl: './movie-details.component.html',
-//   styleUrl: './movie-details.component.css',
-// })
-// export class MovieDetailsComponent implements OnInit {
-//   bgImageVariable = '';
-
-//   movieDetails: movieDetails | null = null;
-//   videoDetails: [] | null = null;
-//   videoInfo: any;
-//   isPlayerVisible = false;
-
-//   constructor(
-//     private movieService: MovieService,
-//     private route: ActivatedRoute
-//   ) {}
-//   ngOnInit(): void {
-//     this.route.queryParamMap.subscribe((params) => {
-//       console.log('Params', params);
-//       const idString = params.get('id');
-//       const id = idString ? +idString : null;
-//       this.getMovieDetails(id);
-//     });
-//   }
-
-//   getMovieDetails(id: number | null) {
-//     if (id) {
-//       this.movieService.getMovieDetails(id).subscribe((res: any) => {
-//         this.movieDetails = res;
-
-//         console.log('this.movieDetails', this.movieDetails);
-//       });
-//     }
-//   }
-
-//   getVideo(id: number | null) {
-//     if (id) {
-//       this.movieService.getVideo(id).subscribe((res: any) => {
-//         console.log('Get Video Info', res);
-//         this.videoDetails = res.results;
-
-//         console.log('this.videoDetails', this.videoDetails);
-
-//         if (this.videoDetails) {
-//           this.videoInfo = this.videoDetails.find(() => true);
-//           console.log('firstObject', this.videoInfo.key);
-//           this.isPlayerVisible = true;
-//         }
-//       });
-//     }
-//   }
-
-//   closePlayer() {
-//     this.isPlayerVisible = false;
-//   }
-// }

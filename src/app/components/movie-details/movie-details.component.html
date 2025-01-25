@@ -1,55 +1,65 @@
 <div class="movie-details-container">
-<div *ngIf="movieDetails" class="container">
- 
-  <div class="image">
-    <img
-      src="https://image.tmdb.org/t/p/w500{{ movieDetails.backdrop_path }}"
-      alt="{{ movieDetails.original_title }}"
-      class="movie-img"
-    />
-  </div>
+  <div *ngIf="movieDetails" class="container">
+    <div
+      class="image"
+      [style.background-image]="
+      'url(https://image.tmdb.org/t/p/w780' + movieDetails.backdrop_path + ')'"
+    ></div>
 
-  <div class="content">
-    <h1>{{ movieDetails.original_title }}</h1>
+    <div class="content">
+      <div class="title-buttons">
+        <h1>{{ movieDetails.original_title }}</h1>
+        <div class="buttons">
+          <button (click)="getVideo(movieDetails.id, 'play')" class="play-button">
+            Play Now
+          </button>
+          <button (click)="getVideo(movieDetails.id, 'trailer')" class="trailer-button">
+            Trailer
+          </button>
+        </div>
+      </div>
 
-    <div class="movie-info">
-      <p class="rating">
-        {{ movieDetails.vote_average }}
-      </p>
-      <p class="runtime">{{ movieDetails.runtime }} mins</p>
-      <div class="genres">
-        <div *ngFor="let genre of movieDetails.genres">
-          <span class="genre">{{ genre.name }}</span>
+      <div class="details">
+        <p>
+          ⭐ {{ movieDetails.vote_average }} | {{ movieDetails.vote_count }} ratings
+        </p>
+        <p> {{ movieDetails.runtime }} mins</p>
+        <p>
+          <ng-container *ngFor="let genre of movieDetails.genres">
+            <span>{{ genre.name }}</span>
+          </ng-container>
+        </p>
+        <p>{{ movieDetails.release_date | date }}</p>
+      </div>
+      <p class="overview">{{ movieDetails.overview }}</p>
+    </div>
+
+    <div class="actors-section">
+      <h3>Actors</h3>
+      <div class="actors-list">
+        <div class="actor" *ngFor="let actor of movieDetails.actors">
+          <img
+            [src]="actor.profile_path ? 'https://image.tmdb.org/t/p/w185' + actor.profile_path : '/assets/placeholder.jpg'"
+            [alt]="actor.name"
+          />
+          <p>{{ actor.name }}</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <p class="overview">{{ movieDetails.overview }}</p>
-
-    <p class="release-date">{{ movieDetails.release_date | date }}</p>
-
-    <div class="buttons">
-      <button (click)="getVideo(movieDetails.id, 'play')" class="play-button">
-        Play now
-      </button>
-      <button (click)="getVideo(movieDetails.id, 'trailer')" class="trailer-button">
-        Trailer
-      </button>
+  <div *ngIf="isPlayerVisible" class="youtube-modal" (click)="closePlayer()">
+    <div class="youtube-player-container" (click)="$event.stopPropagation()">
+      <iframe
+        *ngIf="isPlayerVisible"
+        width="560"
+        height="315"
+        [src]="getVideoUrl()"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
     </div>
-  </div>
-</div>
-
-<div *ngIf="isPlayerVisible" class="youtube-modal" (click)="closePlayer()">
-  <div class="youtube-player-container" (click)="$event.stopPropagation()">
-    <iframe
-      *ngIf="isPlayerVisible"
-      width="560"
-      height="315"
-      [src]="getVideoUrl()"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
+  
   </div>
 
-</div>
 </div>

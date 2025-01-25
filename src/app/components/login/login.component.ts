@@ -47,16 +47,6 @@ export class LoginComponent {
     });
   }
 
-  // ngOnInit() {
-  //   this.loginForm = new FormGroup({
-  //     email: new FormControl('', [
-  //       Validators.required,
-  //       Validators.minLength(6),
-  //     ]),
-  //     pwd: new FormControl('', [Validators.required, Validators.minLength(6)]),
-  //   });
-  // }
-
   Notflix() {
     this.router.navigate(['movieList'])
   }

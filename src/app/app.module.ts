@@ -3,13 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { HttpClientModule } from '@angular/common/http';
-import { Step1Component } from './components/register/step1/step1.component';
-import { Step2Component } from './components/register/step2/step2.component';
-import { Step3Component } from './components/register/step3/step3.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { RegisterComponent } from './components/register/register/register.component';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,7 +26,7 @@ import { AuthGuard } from './core/guards/auth.guard';
   declarations: [
     AppComponent,
     // LoginComponent,
-    MainpageComponent,
+    // MainpageComponent,
     // MovieItemComponent,
     // MovieListComponent,
     // MovieDetailsComponent,

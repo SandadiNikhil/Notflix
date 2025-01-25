@@ -1,39 +1,43 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MainpageComponent } from './components/mainpage/mainpage.component';
-import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
-import { Step1Component } from './components/register/step1/step1.component';
-import { Step2Component } from './components/register/step2/step2.component';
-import { Step3Component } from './components/register/step3/step3.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: MainpageComponent },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./components/mainpage/mainpage.module').then((m) => m.MainpageModule),
+  },
+
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./components/login/login.module').then((m) => m.LoginModule),
+  }, 
+
   {
     path: 'register',
     loadChildren: () =>
-      import('./components/register/register.module').then(
-        (m) => m.RegisterModule
-      ),
+      import('./components/register/register.module').then((m) => m.RegisterModule),
   },
-  { path: 'register-step1', component: Step1Component },
-  { path: 'register-step2', component: Step2Component },
-  { path: 'register-step3', component: Step3Component },
+
   {
     path: 'movieList',
-    component: MovieListComponent,
+    loadChildren: () =>
+      import('./components/movie-list/movie-list.module').then((m) => m.MovieListModule),
     canActivate: [AuthGuard],
   },
+
   {
-    path: 'movieDetails', 
-    component: MovieDetailsComponent, 
+    path: 'movieDetails',
+    loadChildren: () =>
+      import('./components/movie-details/movie-details.module').then((m) => m.MovieDetailsModule),
     canActivate: [AuthGuard],
   },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: MainpageComponent },
+  { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({

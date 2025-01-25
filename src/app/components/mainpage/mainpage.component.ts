@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 })
 
 export class MainpageComponent {
-  // ...
-
+  
   constructor(private router: Router) {}
 
-  navigateToRegister(event: Event) {
-    event.preventDefault(); // Prevent form submission
-    this.router.navigate(['/register']);
-  }
+  // navigateToRegister(event: Event) {
+  //   event.preventDefault();
+  //   console.log('Navigating to /register');
+  //   this.router.navigate(['/register']);
+  // }
 }

@@ -85,27 +85,16 @@ export class MovieService {
     this.http
       .get<MovieResponse>(url)
       .pipe(
-        tap((res) => this.moviesSubject$.next(res.results)),
+        // tap((res) => this.moviesSubject$.next(res.results)),
+        tap((res) => {
+          const currentMovies = this.moviesSubject$.value; 
+          const updatedMovies = [...currentMovies, ...res.results];
+          this.moviesSubject$.next(updatedMovies);
+        }),
         catchError((error) => this.handleError(error))
       )
       .subscribe(() => this.loadingSubject$.next(false));
   }
-
-  // getMovieDetails(id: number): void {
-  //   this.loadingSubject$.next(true);
-  //   this.errorSubject$.next(null);
-  //   this.movieDetailsSubject$.next(null);
-
-  //   const url = `${this.baseUrl}movie/${id}?api_key=${this.apiKey}`;
-
-  //   this.http
-  //     .get<movieDetails>(url)
-  //     .pipe(
-  //       tap((res) => this.movieDetailsSubject$.next(res)),
-  //       catchError((error) => this.handleError(error))
-  //     )
-  //     .subscribe(() => this.loadingSubject$.next(false));
-  // }
 
   getMovieDetails(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}`);
@@ -164,7 +153,6 @@ export class MovieService {
     if (!query.trim()) {
       return of({ page: 1, results: [], total_pages: 0, total_results: 0 });
     }
-
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${encodeURIComponent(
       query
     )}&page=${page}`;

@@ -5,11 +5,12 @@ import { Movie } from '../../core/interfaces/movies.interface';
 import { CommonModule } from '@angular/common';
 import { MovieItemComponent } from '../movie-item/movie-item.component';
 import { Router } from '@angular/router';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule, MovieItemComponent],
+  imports: [CommonModule, MovieItemComponent, InfiniteScrollModule],
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css'],
 })
@@ -18,7 +19,12 @@ export class MovieListComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
 
-  constructor(private movieService: MovieService, private router: Router) {
+  currentPage = 1;
+
+  constructor(
+    private movieService: MovieService, 
+    private router: Router
+  ) {
     this.movies$ = this.movieService.movies$;
     this.loading$ = this.movieService.loading$;
     this.error$ = this.movieService.error$;
@@ -26,11 +32,16 @@ export class MovieListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMovies();
+    this.getMovies(this.currentPage);
   }
 
-  getMovies() {
-    this.movieService.getMovies(1);
+  getMovies(page: number) {
+    this.movieService.getMovies(page);
+  }
+
+  onScrollDown(): void {
+    this.currentPage++;
+    this.getMovies(this.currentPage);
   }
 
   trackByMovieId(index: number, movie: Movie): number {

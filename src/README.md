@@ -117,5 +117,3 @@
 - Add localization support (i18n).
 - Enhance monitoring with Prometheus/Grafana.
 - Support for additional user roles and permissions.
-
----

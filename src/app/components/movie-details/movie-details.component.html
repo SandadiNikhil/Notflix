@@ -1,57 +1,56 @@
 <div class="movie-details-container">
-  <div *ngIf="movieDetails" class="container">
-    <div
-      class="image"
-      [style.background-image]="
-      'url(https://image.tmdb.org/t/p/w780' + movieDetails.backdrop_path + ')'"
-    ></div>
+  <div
+    class="backdrop"
+    [style.background-image]="
+      'url(https://image.tmdb.org/t/p/w1280' + (movieDetails.backdrop_path || '') + ')'
+    "
+  ></div>
 
-    <div class="content">
-      <div class="title-buttons">
-        <h1>{{ movieDetails.original_title }}</h1>
-        <div class="buttons">
-          <button (click)="getVideo(movieDetails.id, 'play')" class="play-button">
-            Play Now
-          </button>
-          <button (click)="getVideo(movieDetails.id, 'trailer')" class="trailer-button">
-            Trailer
-          </button>
-        </div>
-      </div>
-
-      <div class="details">
-        <p>
-          ⭐ {{ movieDetails.vote_average }} | {{ movieDetails.vote_count }} ratings
-        </p>
-        <p> {{ movieDetails.runtime }} mins</p>
-        <p>
-          <ng-container *ngFor="let genre of movieDetails.genres">
-            <span>{{ genre.name }}</span>
-          </ng-container>
-        </p>
-        <p>{{ movieDetails.release_date | date }}</p>
-      </div>
-      <p class="overview">{{ movieDetails.overview }}</p>
-    </div>
-
-    <div class="actors-section">
-      <h3>Actors</h3>
-      <div class="actors-list">
-        <div class="actor" *ngFor="let actor of movieDetails.actors">
+  <div class="actors-section" *ngIf="movieDetails?.actors?.length; else noActors">
+    <h2>Actors</h2>
+    <div class="actors-list">
+      <ul>
+        <li *ngFor="let actor of movieDetails.actors">
           <img
-            [src]="actor.profile_path ? 'https://image.tmdb.org/t/p/w185' + actor.profile_path : '/assets/placeholder.jpg'"
-            [alt]="actor.name"
+            *ngIf="actor.profile_path"
+            [src]="'https://image.tmdb.org/t/p/w300/' + actor.profile_path"
+            alt="{{ actor.name }}"
           />
-          <p>{{ actor.name }}</p>
-        </div>
-      </div>
+          <p>
+            {{ actor.name }}
+            <span *ngIf="actor.character">as {{ actor.character }}</span>
+          </p>
+        </li>
+      </ul>
     </div>
   </div>
+  <ng-template #noActors>
+    <p class="no-actors">No actor information available.</p>
+  </ng-template>
 
-  <div *ngIf="isPlayerVisible" class="youtube-modal" (click)="closePlayer()">
-    <div class="youtube-player-container" (click)="$event.stopPropagation()">
+  <div class="details-section">
+    <div class="buttons">
+      <button (click)="getVideo(movieDetails.id, 'play')">Play</button>
+      <button (click)="getVideo(movieDetails.id, 'trailer')">Watch Trailer</button>
+    </div>
+
+    <h1>{{ movieDetails.title || movieDetails.original_title }}</h1>
+    <div class="details">
+      <p>⭐ {{ movieDetails.vote_average }} | {{ movieDetails.vote_count }} ratings</p>
+      <p>{{ movieDetails.runtime }} mins</p>
+      <p>
+        <ng-container *ngFor="let genre of movieDetails?.genres">
+          <span> {{ genre.name }} </span>
+        </ng-container>
+      </p>
+      <p>{{ movieDetails.release_date | date }}</p>
+    </div>
+    <p class="overview">{{ movieDetails.overview }}</p>
+  </div>
+
+  <div class="youtube-modal" *ngIf="isPlayerVisible" (click)="closePlayer()">
+    <div class="youtube-modal-content" (click)="$event.stopPropagation()">
       <iframe
-        *ngIf="isPlayerVisible"
         width="560"
         height="315"
         [src]="getVideoUrl()"
@@ -59,7 +58,6 @@
         allowfullscreen
       ></iframe>
     </div>
-  
   </div>
 
 </div>

@@ -6,7 +6,7 @@ import {
   MovieResponse,
   SignupData,
   movieDetails,
-} from './interfaces/movies.interface';
+} from '../interfaces/movies.interface';
 
 import { BehaviorSubject, Observable, throwError, of, Subject } from 'rxjs';
 import { catchError, tap, map, finalize } from 'rxjs/operators';
@@ -112,7 +112,13 @@ export class MovieService {
   }
   
   getCastDetails(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}movie/${id}/credits?api_key=${this.apiKey}`);
+    const url = `${this.baseUrl}movie/${id}/credits?api_key=${this.apiKey}`;
+    return this.http.get<any>(url).pipe(
+      tap((response) => {
+        console.log('Cast Response:', response); 
+      }),      
+      catchError((error) => this.handleError(error))
+    );
   }
   
   getVideo(id: number): Observable<any> {

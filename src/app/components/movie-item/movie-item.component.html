@@ -1,23 +1,27 @@
 <div class="container">
-  <div
-    class="background-image"
-    [style.backgroundImage]="
-      'url(https://image.tmdb.org/t/p/w500/' + movie.poster_path + ')'
-    "
-  ></div>
+  <div *ngIf="loading" class="spinner">Loading...</div>
+  <ng-container *ngIf="!loading">
+    <div
+      class="background-image"
+      [style.backgroundImage]="
+        'url(https://image.tmdb.org/t/p/w500/' + movie.poster_path + ')'
+      "
+    ></div>
  
-  <div class="details">
-    <div class="title">{{ movie.original_title }}</div>
-    <div class="content">
-      <span class="tag year">{{ movie.release_date | date : "yyyy" }}</span>
-      <span class="tag lang">{{ movie.original_language | uppercase }}</span>
-      <span class="tag rating">{{ movie.vote_average | number: '1.2-2' }}</span>
+    <div class="details">
+      <div class="title">{{ movie.original_title }}</div>
+      <div class="content">
+        <span class="tag year">{{ movie.release_date | date : "yyyy" }}</span>
+        <span class="tag lang">{{ movie.original_language | uppercase }}</span>
+        <span class="tag rating">{{ movie.vote_average | number: '1.2-2' }}</span>
 
+      </div>
+
+      <p class="overview">{{ movie.overview }}</p>
+      <button (click)="movieDetails(movie)" class="details-btn">
+        More Details..
+      </button>
     </div>
 
-    <p class="overview">{{ movie.overview }}</p>
-    <button (click)="movieDetails(movie)" class="details-btn">
-      More Details..
-    </button>
-  </div>
+  </ng-container>
 </div>

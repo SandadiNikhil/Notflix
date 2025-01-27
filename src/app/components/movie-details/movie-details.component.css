@@ -1,13 +1,13 @@
 .movie-details-container {
   position: relative;
   width: 100%;
-  height: 100vh; 
-  overflow: hidden;
+  min-height: 100vh;
   color: white;
   font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
-.image {
+.backdrop {
   position: absolute;
   top: 0;
   left: 0;
@@ -15,84 +15,111 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  z-index: -1; 
-  filter: brightness(60%);
+  filter: brightness(80%);
+  z-index: -1;
 }
 
-.content {
+
+.actors-section {
   position: absolute;
-  bottom: 20px; 
-  left: 80px;
-  width: calc(75% - 40px);
-  padding: 40px;
-  flex: 1 1 auto;
+  top: 35%;
+  right: 40px;
+  width: 200px; 
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 2;
 }
 
-.content h1 {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
-  font-weight: bold;
+.actors-section h2 {
+  position: center; 
+
+  margin: 0 0 15px;
+  font-size: 1.4rem;
 }
 
-.details {
-  font-size: rem;
-  margin-bottom: 20px;
+.actors-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px; 
+}
+
+.actors-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.actors-list li {
   display: flex;
-  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
   align-items: center;
-  gap: 15px;
 }
 
-.details span {
-  margin-right: 25px;
+.actors-list li img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 5px; 
+.no-actors {
+  position: absolute;
+  top: 40%;
+  right: 40px;
+  width: 200px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 2;
 }
 
-.runtime {
-  margin-left: auto; 
-}
 
-.overview {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  text-align: justify;
+.details-section {
+  position: absolute;
+  bottom: 60px;
+  left: 40px;
+  max-width: 700px; 
+  z-index: 2;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .buttons {
   display: flex;
   gap: 15px;
-  margin-top: 15px;
+  margin-bottom: 20px;
 }
 
-.title-buttons {
+.details-section h1 {
+  font-size: 2rem;
+  margin: 0 0 15px 0;
+}
+
+.details {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
-.title-buttons h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  flex: 2;
+.overview {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: justify;
 }
 
-.title-buttons .buttons {
-  display: flex;
-  gap: 15px;
-  flex: 1;
-}
+
 button {
   background-color: #e50914;
   border: none;
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 4px;
   color: white;
   transition: background-color 0.3s;
 }
@@ -101,77 +128,6 @@ button:hover {
   background-color: #ee787e;
 }
 
-.actors-section {
-  position: absolute;
-  top: 50px; 
-  right: 20px;
-  width: 15%; 
-  height: calc(100% - 40px); 
-  padding: 20px;
-  overflow-y: auto; 
-}
-
-.actors-section h3 {
-  margin-bottom: 15px;
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.actors-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  overflow-y: hidden;
-  /* max-height: calc(100vh - 80px); 
-  padding-right: 10px; */
-}
-
-.actor {
-  flex: 0 0 auto;
-  text-align: center;
-}
-
-.actor img {
-  width: 80px; 
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 5px;
-  object-fit: cover;
-}
-
-.actor p {
-  font-size: 0.9rem;
-  text-align: center;
-  white-space: nowrap; 
-}
-
-@media (max-width: 768px) {
-  .content {
-    width: calc(100% - 40px); 
-    bottom: 10px;
-  }
-
-  .actors-section {
-    position: relative; 
-    width: 100%; 
-    height: auto;
-    margin-top: 20px;
-  }
-
-  .actors-list {
-    flex-direction: row; 
-    overflow-x: auto;
-  }
-
-  .actor img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .actor p {
-    font-size: 0.8rem;
-  }
-}
 
 .youtube-modal {
   position: fixed;
@@ -181,19 +137,41 @@ button:hover {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
 }
 
-.youtube-player-container {
-  position: relative;
-  width: 80%;
-  max-width: 800px;
+.youtube-modal-content {
+  background-color: #181818;
+  padding: 20px;
+  border-radius: 8px;
   text-align: center;
 }
-
-.youtube-player-container iframe {
+.youtube-modal-content iframe {
+  width: 560px;
+  height: 315px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+  .actors-section, .no-actors {
+    top: 50%;
+    right: 20px;
+    width: 250px;
+    transform: translateY(-50%);
+  }
+  .details-section {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    max-width: 90%;
+  }
+  .youtube-modal-content iframe {
+    width: 100%;
+    height: 240px;
+  }
 }

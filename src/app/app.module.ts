@@ -15,14 +15,15 @@ import { YouTubePlayer } from '@angular/youtube-player';
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginComponent } from './components/login/login.component';
-import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
-import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { AuthService } from './core/services/auth.service';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/guards/auth.guard';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
 
 @NgModule({
+
   declarations: [
     AppComponent,
     // LoginComponent,
@@ -32,6 +33,7 @@ import { AuthGuard } from './core/guards/auth.guard';
     // MovieDetailsComponent,
     // NavBarComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -50,9 +52,9 @@ import { AuthGuard } from './core/guards/auth.guard';
     MovieDetailsComponent,
     NavBarComponent,
     CoreModule,
-
     // MainpageComponent,
     ],
+    
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [provideAnimationsAsync(), AuthService, AuthGuard],
     bootstrap: [AppComponent],

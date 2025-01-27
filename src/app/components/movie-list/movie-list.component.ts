@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from '../../services/movie.service';
+import { MovieService } from '../../core/services/movie.service';
 import { Observable } from 'rxjs';
-import { Movie } from '../../services/interfaces/movies.interface';
+import { Movie } from '../../core/interfaces/movies.interface';
 import { CommonModule } from '@angular/common';
 import { MovieItemComponent } from '../movie-item/movie-item.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -17,10 +18,11 @@ export class MovieListComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private router: Router) {
     this.movies$ = this.movieService.movies$;
     this.loading$ = this.movieService.loading$;
     this.error$ = this.movieService.error$;
+    
   }
 
   ngOnInit(): void {

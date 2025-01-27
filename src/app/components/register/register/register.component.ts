@@ -31,16 +31,61 @@ import { PlanComponent } from '../plan/plan.component';
   styleUrls: ['./register.component.css'],
 })
 
-export class RegisterComponent implements OnInit {
-  // constructor(private router: Router) {}
-  constructor() {}
 
-  // navigateToStep1() {
-  //   this.router.navigate(['register/step1']); 
-  // }
-  ngOnInit() {
+export class RegisterComponent implements OnInit {
+  registrationForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.registrationForm = this.fb.group({
+      step1: this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+      }),
+      plan: this.fb.group({
+        planType: ['', Validators.required],
+      }),
+      step2: this.fb.group({
+        username: ['', Validators.required],
+        tmdb: ['', Validators.required],
+      }),
+      step3: this.fb.group({}),
+    });
+  }
+
+  ngOnInit(): void {
     console.log('RegisterComponent initialized');
   }
+
+  getFormGroup(formGroupName: string): FormGroup {
+    const formGroup = this.registrationForm.get(formGroupName);
+    if (formGroup instanceof FormGroup) {
+      return formGroup;
+    } else {
+      throw new Error(`FormGroup with name ${formGroupName} not found.`);
+    }
+  }
+
+  goToNextStep() {
+    console.log('Going to the next step...');
+  }
+
+  onSubmit(): void {
+    console.log('Form submitted', this.registrationForm.value);
+  }
+}
+
+
+
+// export class RegisterComponent implements OnInit {
+//   // constructor(private router: Router) {}
+//   constructor() {}
+
+//   // navigateToStep1() {
+//   //   this.router.navigate(['register/step1']); 
+//   // }
+//   ngOnInit() {
+//     console.log('RegisterComponent initialized');
+//   }
 
 //   getFormGroup(formGroupName: string): FormGroup {
 //     const formGroup = this.registrationForm.get(formGroupName);
@@ -50,7 +95,7 @@ export class RegisterComponent implements OnInit {
 //       throw new Error(`FormGroup with name ${formGroupName} not found.`);
 //     }
 //   }
-}
+// }
 
 // export class RegisterComponent implements OnInit {
 //   registrationForm!: FormGroup;

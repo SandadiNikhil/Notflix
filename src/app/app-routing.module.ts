@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { MovieDetailResolver } from './core/resolvers/movie-detail.resolver';
 
 const routes: Routes = [
   {
@@ -30,10 +31,11 @@ const routes: Routes = [
   },
 
   {
-    path: 'movieDetails',
+    path: 'movieDetails/:id',
     loadChildren: () =>
       import('./components/movie-details/movie-details.module').then((m) => m.MovieDetailsModule),
     canActivate: [AuthGuard],
+    resolve: { movie: MovieDetailResolver },
   },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },

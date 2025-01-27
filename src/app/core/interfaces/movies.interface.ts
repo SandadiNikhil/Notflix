@@ -63,7 +63,15 @@ export interface movieDetails {
   video?: boolean;
   vote_average?: number;
   vote_count?: number;
-  actors?: { profile_path: string; name: string }[]; 
+  // actors?: { profile_path: string; name: string }[]; 
+  actors: Actor[];
+  
+}
+
+export interface Actor {
+  name: string;
+  character: string; 
+  profile_path: string | null; 
 }
 
 // export interface movieDetails {

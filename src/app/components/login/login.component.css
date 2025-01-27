@@ -4,6 +4,13 @@
     align-items: center;
     height: 80vh;
     width: 100%;
+
+    min-height: 100vh;
+    /* background: red; */
+    background: url('/assets/netflix.jpg') center/ cover no-repeat;  
+    position: relative; 
+    color: white;
+  
   }
   
   .login-card {

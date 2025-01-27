@@ -1,8 +1,10 @@
-/* .container {
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0);
-  } */
-
+.movie-list-container{
+  position: relative;
+  min-height: 100vh;
+  background: url('/assets/netflix.jpg') center/ cover no-repeat;  
+  padding-top: 60px; 
+}
+ 
   .list{
     padding: 20px;
     display: flex;

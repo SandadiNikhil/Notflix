@@ -6,10 +6,9 @@ infiniteScroll
 
 class="movie-list-container" 
 style="background-color: #000;"
-
 >
   <div *ngIf="loading$ | async" class="loading-indicator">
-    <p>Loading movies...</p>
+    <p>Loading movies</p>
   </div>
   
   <div *ngIf="error$ | async as error" class="error-message">

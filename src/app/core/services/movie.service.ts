@@ -7,9 +7,8 @@ import {
   SignupData,
   movieDetails,
 } from '../interfaces/movies.interface';
-
-import { BehaviorSubject, Observable, throwError, of, Subject } from 'rxjs';
-import { catchError, tap, map, finalize } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError, of } from 'rxjs';
+import { catchError, tap, finalize } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
 
@@ -27,6 +26,7 @@ export class MovieService {
   private currentUser: string | null = null;
 
   private moviesSubject$ = new BehaviorSubject<Movie[]>([]);
+  currentPage = 1;
   movies$ = this.moviesSubject$.asObservable();
 
   private movieDetailsSubject$ = new BehaviorSubject<movieDetails | null>(null);
@@ -41,6 +41,7 @@ export class MovieService {
   constructor(private http: HttpClient, private router: Router) {
     this.loadCurrentUser();
   }
+
   // Example of adding JWT token to headers (will be used after login)
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('jwt_token'); // Or get it from your auth service
@@ -56,12 +57,17 @@ export class MovieService {
       this.currentUser = storedUsername;
     }
   }
+
   private storeUsername(username: string | null) {
     if (username) {
       localStorage.setItem('current_user', username);
     } else {
       localStorage.removeItem('current_user');
     }
+  }
+
+  get currentMovies(): Movie[] {
+    return this.moviesSubject$.value;
   }
 
   logout() {
@@ -175,4 +181,5 @@ export class MovieService {
       })
     );
   }
+
 }

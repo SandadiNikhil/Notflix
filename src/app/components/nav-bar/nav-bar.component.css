@@ -1,25 +1,20 @@
 .navbar {
   display: flex;
+  position: fixed; 
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff00;
+  background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
   padding: 10px 20px;
-  
-}
-
-/* .navbar {
-  position: sticky;
   top: 0;
-  left: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.9); 
-  color: white;
-  padding: 10px 20px;
-} */
+  z-index: 9999;
+  box-sizing: border-box;
+  /* overflow: hidden; */
+  backdrop-filter: blur(10px); 
+
+}
 
 .logo a {
   display: flex;

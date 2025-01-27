@@ -1,61 +1,17 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 30px;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
-
-.header .logo img {
-  width: 150px;
-  margin-left: 80px;
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-right: 60px;
-}
-
-.auth-buttons .btn {
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.auth-buttons .btn-sign-in {
-  background-color: transparent;
+.background {
+  min-height: 100vh;
+  background: url('/assets/netflix.jpg') center/ cover no-repeat;  
+  position: relative; 
   color: white;
-  border: 1px solid white;
-}
-
-.auth-buttons .btn-sign-in:hover {
-  background-color: white;
-  color: #e50914;
-}
-
-.auth-buttons .btn-register {
-  background-color: #e50914;
-  color: white;
-}
-
-.auth-buttons .btn-register:hover {
-  background-color: #f40612;
+  margin: 0;
+  padding: 0;
+  background-attachment: fixed;
 }
 
 .content {
   text-align: center;
-  margin-top: 200px;
   color: white;
-  padding: 0 20px;
+  padding: 200px;
 }
 
 .content h1 {

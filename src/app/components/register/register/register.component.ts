@@ -10,6 +10,8 @@ import { Step1Component } from '../step1/step1.component';
 import { Step2Component } from '../step2/step2.component';
 import { Step3Component } from '../step3/step3.component';
 import { PlanComponent } from '../plan/plan.component';
+import { Router } from '@angular/router';
+import { MovieService } from '../../../core/services/movie.service';
 
 @Component({
   selector: 'app-register',
@@ -35,7 +37,11 @@ import { PlanComponent } from '../plan/plan.component';
 export class RegisterComponent implements OnInit {
   registrationForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private movieService: MovieService, 
+    private router: Router
+  ) {
     this.registrationForm = this.fb.group({
       step1: this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -71,109 +77,34 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Form submitted', this.registrationForm.value);
+    if (this.registrationForm.valid) {
+      const email = this.registrationForm.get('step1.email')?.value;
+      const password = this.registrationForm.get('step1.password')?.value;
+      const username = this.registrationForm.get('step2.username')?.value;
+      // const tmdb = this.registrationForm.get('step2.tmdb')?.value;
+      const plan = this.registrationForm.get('plan.planType')?.value;
+      //console.log('Payload:', { email, password, username, tmdb, plan });
+      console.log('Payload:', { email, password, username, plan });
+
+      this.movieService.signupData = {
+        email,
+        password,
+        username,
+        // tmdb,
+        plan,
+      };
+      this.movieService.signup().subscribe({
+        next: (res) => {
+          console.log('Signup success', res); 
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.error('Signup error', err);
+          alert('Signup failed: ' + err.message);
+        }
+      });
+    } else {  console.warn('Form is invalid, not sending request'); }
+    console.log('Current Registration Form Values:', this.registrationForm.value);
   }
+
 }
-
-
-
-// export class RegisterComponent implements OnInit {
-//   // constructor(private router: Router) {}
-//   constructor() {}
-
-//   // navigateToStep1() {
-//   //   this.router.navigate(['register/step1']); 
-//   // }
-//   ngOnInit() {
-//     console.log('RegisterComponent initialized');
-//   }
-
-//   getFormGroup(formGroupName: string): FormGroup {
-//     const formGroup = this.registrationForm.get(formGroupName);
-//     if (formGroup instanceof FormGroup) {
-//       return formGroup;
-//     } else {
-//       throw new Error(`FormGroup with name ${formGroupName} not found.`);
-//     }
-//   }
-// }
-
-// export class RegisterComponent implements OnInit {
-//   registrationForm!: FormGroup;
-
-//   @ViewChild('stepper') private stepper!: MatStepper;
-
-//   constructor(
-//     private fb: FormBuilder,
-//     private router: Router,
-//     private authService: AuthService
-//   ) {}
-
-//   ngOnInit(): void {
-//     console.log('RegisterComponent initialized');
-//     this.registrationForm = this.fb.group({
-//       step1: this.fb.group({
-//         email: ['', [Validators.required, Validators.email]],
-//         password: ['', [Validators.required, Validators.minLength(8)]],
-//       }),
-//       plan: this.fb.group({
-//         planType: ['', Validators.required],
-//       }),
-//       step2: this.fb.group({
-//         username: ['', [Validators.required]],
-//         tmdb: ['', [Validators.required]],
-//       }),
-//       step3: this.fb.group({
-//       }),
-//     });
-//   }
-
-//   getFormGroup(formGroupName: string): FormGroup {
-//     const formGroup = this.registrationForm.get(formGroupName);
-//     if (formGroup instanceof FormGroup) {
-//       return formGroup;
-//     } else {
-//       throw new Error(`FormGroup with name ${formGroupName} not found.`);
-//     }
-//   }
-
-//   onSubmit(): void {
-//     console.log('onSubmit() called');
-//     console.log('Form Value:', this.registrationForm.value);
-
-//     if (this.registrationForm.valid) {
-//       console.log('Registration data:', this.registrationForm.value);
-
-//       const email = this.registrationForm.get('step1.email')?.value;
-//       const password = this.registrationForm.get('step1.password')?.value;
-//       const username = this.registrationForm.get('step2.username')?.value;
-//       const tmdb = this.registrationForm.get('step2.tmdb')?.value;
-//       const plan = this.registrationForm.get('plan.planType')?.value;
-
-//       this.authService.addSignupData('email', email);
-//       this.authService.addSignupData('password', password);
-//       this.authService.addSignupData('username', username);
-//       this.authService.addSignupData('tmdb', tmdb);
-//       this.authService.addSignupData('plan', plan);
-
-//       this.authService.signup().subscribe({
-//         next: () => {
-//           console.log('Signup completed');
-//           this.router.navigate(['/login']);
-//         },
-//         error: (err: any) => alert(err.message),
-//       });
-//     } else {
-//       console.error('Form is not valid');
-//     }
-//     console.log('Current Registration Form Values:', this.registrationForm.value);
-//   }
-  
-  
-//   goToNextStep() {
-//     if (this.stepper) {
-//       this.stepper.next();
-//     } else {
-//       console.error('MatStepper instance is not available.');
-//     }
-//   }
-// }

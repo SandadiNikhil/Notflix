@@ -21,7 +21,7 @@ export class MovieService {
   private apiKey = '09ede2b2422b2a4d970701cac92ebd60';
   private authServerPath = 'http://localhost:5566/api/v1/auth';
 
-  private signupData: SignupData = {};
+  // private signupData: SignupData = {};
 
   private currentUser: string | null = null;
 
@@ -81,6 +81,7 @@ export class MovieService {
   private storeToken(token: string) {
     localStorage.setItem('access_token', token);
   }
+  signupData: SignupData = {};
 
   getMovies(page: number): void {
     this.loadingSubject$.next(true);
@@ -181,5 +182,7 @@ export class MovieService {
       })
     );
   }
+
+  
 
 }

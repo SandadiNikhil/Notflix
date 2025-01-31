@@ -1,16 +1,32 @@
-<form [formGroup]="formGroup">
-    <mat-form-field>
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" required />
-      <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
-        Username is required
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>TMDB API Key</mat-label>
-      <input matInput formControlName="tmdb" required />
-      <mat-error *ngIf="formGroup.get('tmdb')?.hasError('required')">
-        TMDB API Key is required
-      </mat-error>
-    </mat-form-field>
-  </form>
+<div class="background-container">
+  <div class="step-container">
+  
+    <img src="/assets/register/Checkmark.png" alt="Check" class="check" />
+    <p class="step-title">STEP 2 OF 3</p>
+  
+    <div class="title-with-image">
+      <h1>Create a Username && Add your Tmdb Api_Key</h1>
+      <img src="/assets/register/tmdb_icon.jpeg" alt="API Icon" class="title-image" />
+    </div>
+    <p class="subtitle">Just a few more steps and you're done!</p>
+    <p class="subtitle">We hate paperwork, too.</p>
+  
+    <form [formGroup]="form" (ngSubmit)="next()">
+      <mat-form-field class="custom-input" appearance="outline">
+        <input matInput formControlName="username" placeholder="Enter your username*" />
+        <mat-error *ngIf="form.get('username')?.hasError('required')">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="custom-input" appearance="outline">
+        <input matInput formControlName="tmdbKey" placeholder="Add your Tmdb Api_Key *" />
+        <mat-error *ngIf="form.get('tmdbKey')?.hasError('required')">
+          TMDB API Key is required
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="warn" type="submit" class="next-button">Next</button>
+    </form>
+  </div>
+</div>

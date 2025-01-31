@@ -1,50 +1,83 @@
-<!-- <div class="page-3">
-    <div class="sign-up">
-      <span>STEP 3 OF 3</span>
-      <h1>Choose Your Plan</h1>
-      <ul>
-        <li *ngFor="let plan of plans" (click)="selectedPlan = plan" [class.selected]="selectedPlan === plan">
-          {{ plan }}
-        </li>
-      </ul>
-  
-      <button type="button" (click)="completeRegistration()">Finish</button>
-    </div>
-  </div> -->
+<div class="background-container">
+  <div class="step-container">
 
+    <img src="/assets/register/Checkmark.png" alt="Check" class="check" />
+    <p class="step-title">STEP 3 OF 3</p>
+    
+    <h1>Choose the plan that's right for you</h1>
+    <ul class="plan-features">
+      <li>✔ Watch all you want. Ad-free.</li>
+      <li>✔ Recommendations just for you.</li>
+      <li>✔ Change or cancel your plan anytime.</li>
+    </ul>
 
-<!-- 
-<div class="review-container">
-  <p><strong>Username:</strong> {{ reviewData.username }}</p>
-  <p><strong>Email:</strong> {{ reviewData.email }}</p>
-  <p><strong>Password:</strong> {{ '•'.repeat(reviewData.password?.length || 0) }}</p>
-  <p><strong>Plan:</strong> {{ reviewData.plan }}</p>
-  <p><strong>TMDB API Key:</strong> {{ reviewData.tmdbApiKey }}</p>
-</div> -->
+    <table class="plan-table">
+      <tr>
+        <th></th>
+        <th>
+        <div class="plan-button-container">
 
+          <button
+            class="plan-header"
+            [ngClass]="{ 'selected': selectedPlan === 'Basic' }"
+            (click)="selectPlan('Basic')"
+          >
+            Basic
+          </button>
+        </div>
+        </th>
 
-<div class="review-container">
-  <div class="review-details">
-    <div class="review-item">
-      <span class="label">Username:</span>
-      <span class="value">{{ reviewData.username }}</span>
-    </div>
-    <div class="review-item">
-      <span class="label">Email:</span>
-      <span class="value">{{ reviewData.email }}</span>
-    </div>
-    <div class="review-item">
-      <span class="label">Password:</span>
-      <span class="value">{{ '•'.repeat(reviewData.password.length) }}</span>
-    </div>
-    <div class="review-item">
-      <span class="label">Plan:</span>
-      <span class="value">{{ reviewData.plan }}</span>
-    </div>
-    <div class="review-item">
-      <span class="label">TMDB API Key:</span>
-      <span class="value">{{ reviewData.tmdbApiKey }}</span>
-    </div>
+        <th>
+          <div class="plan-button-container">
+          <button
+            class="plan-header"
+            [ngClass]="{ 'selected': selectedPlan === 'Standard' }"
+            (click)="selectPlan('Standard')"
+          >
+            Standard
+          </button>
+          </div>
+        </th>
+
+        <th>
+          <div class="plan-button-container">
+          <button
+            class="plan-header"
+            [ngClass]="{ 'selected': selectedPlan === 'Premium' }"
+            (click)="selectPlan('Premium')"
+          >
+            Premium
+          </button>
+          </div>
+        </th>
+      </tr>
+      
+      <tr>
+        <td>Monthly Price</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Basic' }">$9.99</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Standard' }">$15.49</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Premium' }">$19.99</td>
+      </tr>
+      <tr>
+        <td>Video Quality</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Basic' }">Good</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Standard' }">Better</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Premium' }">Best</td>
+      </tr>
+      <tr>
+        <td>Resolution</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Basic' }">480p</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Standard' }">1080p</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Premium' }">4K + HDR</td>
+      </tr>
+      <tr>
+        <td>Watch on your TV, computer, mobile phone, and tablet</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Basic' }">✔</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Standard' }">✔</td>
+        <td [ngClass]="{ 'selected-column': selectedPlan === 'Premium' }">✔</td>
+      </tr>
+    </table>
+
+    <button mat-raised-button color="warn" class="next-button" (click)="submit()">Next</button>
   </div>
-</div>
-
+</div>   

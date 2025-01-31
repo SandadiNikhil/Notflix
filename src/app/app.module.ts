@@ -13,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YouTubePlayer } from '@angular/youtube-player';
 import { CommonModule } from '@angular/common';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
 import { AuthService } from './core/services/auth.service';
@@ -21,6 +20,8 @@ import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/guards/auth.guard';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { RouterModule } from '@angular/router';
+import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 
 @NgModule({
 
@@ -52,6 +53,7 @@ import { MovieListComponent } from './components/movie-list/movie-list.component
     MovieDetailsComponent,
     NavBarComponent,
     CoreModule,
+    RouterModule,
     // MainpageComponent,
     ],
     

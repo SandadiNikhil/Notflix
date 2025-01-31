@@ -4,16 +4,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  padding: 10px 20px;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  /* color: #fff; */
+  padding: 10px 50px;
   top: 0;
   width: 100%;
   z-index: 9999;
   box-sizing: border-box;
-  /* overflow: hidden; */
-  backdrop-filter: blur(10px); 
-
+  backdrop-filter: blur(3px); 
 }
 
 .logo a {
@@ -31,6 +29,15 @@
 .username {
   margin-right: 15px;
   font-weight: bold;
+  font-size: 1.3rem;
+  height: 3rem;
+  line-height: 3rem;
+  background: linear-gradient(235deg, rgb(43, 255, 0), rgb(0, 255, 191));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%; 
+  animation: username-animate 5s linear infinite; 
 }
 
 .auth-links a {
@@ -58,4 +65,13 @@
 
 .user-info button:hover {
   background-color: #f40612;
+}
+
+@keyframes username-animate {
+  0% {
+    background-position: 0% 50%; 
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

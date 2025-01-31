@@ -6,11 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { Step1Component } from '../step1/step1.component';
-import { Step2Component } from '../step2/step2.component';
-import { Step3Component } from '../step3/step3.component';
-import { PlanComponent } from '../plan/plan.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MovieService } from '../../../core/services/movie.service';
 
 @Component({
@@ -19,20 +15,16 @@ import { MovieService } from '../../../core/services/movie.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    Step1Component,
-    Step2Component,
-    Step3Component,
-    PlanComponent,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-
 
 export class RegisterComponent implements OnInit {
   registrationForm: FormGroup;

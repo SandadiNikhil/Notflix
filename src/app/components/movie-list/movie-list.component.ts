@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MovieItemComponent } from '../movie-item/movie-item.component';
 import { Router } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { ScrollService } from '../../core/services/scroll.service';
+import { ScrollService } from '../../core/services/scroll/scroll.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -59,6 +59,7 @@ export class MovieListComponent implements OnInit {
   onWindowScroll() {
     this.scrollService.savePosition(window.scrollY);
   }
+  
   onScrollDown(): void {
     this.currentPage++;
     this.getMovies(this.currentPage);

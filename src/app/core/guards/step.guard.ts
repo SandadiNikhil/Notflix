@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { RegisterService } from '../services/register.service';
+import { RegisterService } from '../services/register/register.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class StepGuard implements CanActivate {
   constructor(private registerService: RegisterService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    const step = route.routeConfig?.path; // Correct way to get step from URL
+    const step = route.routeConfig?.path; 
     const formData = this.registerService.getFormData();
 
     if (step === 'step2' && (!formData.email || !formData.password)) {
@@ -24,6 +24,6 @@ export class StepGuard implements CanActivate {
       return false;
     }
 
-    return true; // Allow navigation if previous steps are completed
+    return true; 
   }
 }

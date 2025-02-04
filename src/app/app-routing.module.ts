@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { MovieDetailResolver } from './core/resolvers/movie-detail.resolver';
+import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -34,8 +35,18 @@ const routes: Routes = [
     path: 'movieDetails/:id',
     loadChildren: () =>
       import('./components/movie-details/movie-details.module').then((m) => m.MovieDetailsModule),
-    canActivate: [AuthGuard],
+      canActivate: 
+      [
+        // AuthGuard,
+        RoleGuard,
+      ],
     resolve: { movie: MovieDetailResolver },
+  },
+
+  {
+    path: 'role',
+    loadChildren: () =>
+      import('./core/roles/role-update.module').then((m) => m.RoleUpdateModule),
   },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },

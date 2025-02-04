@@ -1,13 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { emailValidator } from './email-validator.service';
 
-import { RegisterService } from './register.service';
-
-describe('RegisterService', () => {
-  let service: RegisterService;
-
+describe('ValidatorService', () => {
+  let service: typeof emailValidator;
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RegisterService);
+    service = TestBed.inject(emailValidator);
   });
 
   it('should be created', () => {

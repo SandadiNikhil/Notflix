@@ -16,6 +16,9 @@
       <mat-error *ngIf="form.get('email')?.hasError('email')">
         Invalid email format
       </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('emailExists')">
+        This email address is already in use.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="custom-input" appearance="outline">
@@ -26,6 +29,9 @@
       <mat-error *ngIf="form.get('password')?.hasError('minlength')">
         Password must be at least 8 characters
       </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('emailExists')">
+        This email address is already in use.
+      </mat-error>      
     </mat-form-field>
 
     <a class="forgot-password" href="#">Forgot your password?</a>

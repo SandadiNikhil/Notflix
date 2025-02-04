@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../core/services/authentication/auth.service';
+import { loginValidator } from '../../core/services/email/login-validator.service';
 
 @Component({
   selector: 'app-login',
@@ -20,14 +21,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 
 export class LoginComponent {
-
-  // loginForm: FormGroup = this.fb.group({
-  //   email: new FormControl('', [Validators.required, Validators.minLength(6)]),
-  //   pwd: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  // }); 
-
   loginForm: FormGroup;
-
 
   get email() {
     return this.loginForm.get('email');
@@ -39,16 +33,18 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router:Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
     ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required, Validators.email]],
       pwd: ['', [Validators.required, Validators.minLength(8)]],
-    });
-  }
-
-  Notflix() {
-    this.router.navigate(['movieList'])
+    }
+    // , {
+    //   asyncValidators: [loginValidator(this.http)],
+    //   updateOn: 'blur'
+    // });
+    );
   }
 
   onSubmit() {
@@ -57,17 +53,16 @@ export class LoginComponent {
 
       this.authService.login(email, pwd).subscribe({
         next: (response) => {
-         
-          this.authService.setAuthenticated(true);
-
+          this.authService.setUserRole(response.role); 
+          console.log('Login successful', response);         
           this.router.navigate(['/movieList']);
         },
         error: (err) => {
-          // Handle login error, display a message, etc.
           console.error('Login failed', err);
         },
       });
     }
     console.log(this.loginForm.value);
-  }
+   }
+
 }

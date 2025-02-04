@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterService } from '../../../core/services/register.service';
+import { RegisterService } from '../../../core/services/register/register.service';
 import { MovieService } from '../../../core/services/movie.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -65,7 +65,7 @@ export class Step3Component {
     // 4) Actually call signup to the backend
     this.movieService.signup().subscribe({
       next: (res) => {
-        console.log('Signup completed:', res);
+        console.log('Signu completed:', res);
         // Possibly route to success page
         this.router.navigate(['/success']);
       },

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegisterService } from '../../../core/services/register.service';
+import { RegisterService } from '../../../core/services/register/register.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HttpClient } from '@angular/common/http';
+import { emailValidator } from '../../../core/services/email/email-validator.service';
 
 @Component({
   selector: 'app-step1',
@@ -25,10 +27,17 @@ export class Step1Component {
     private fb: FormBuilder,
     private registerService: RegisterService,
     private router: Router,
+    private http: HttpClient,
     private route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['',  
+        { 
+          validators: [Validators.required, Validators.email], 
+          asyncValidators: [emailValidator(this.http)], 
+          updateOn: 'blur' 
+        }
+      ],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
 

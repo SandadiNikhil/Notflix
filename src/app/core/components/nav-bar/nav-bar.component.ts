@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,16 +13,17 @@ import { AuthService } from '../../services/auth.service';
 
 export class NavBarComponent implements OnInit {
   username: string | null = null;
-  isAuthenticated: boolean = false;
+  isAuthenticated = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
-      this.isAuthenticated = isAuthenticated;
-      console.log('isAuthenticated:', isAuthenticated);
-      if (isAuthenticated) {
-        this.username = this.authService.getSignupData('username');
+    this.authService.isAuthenticated$.subscribe((status) => {
+      this.isAuthenticated = status;
+      console.log('isAuthenticated:', status);
+      console.log('nav-bar: isAuthenticated:', status);
+
+      if (status) {
         this.username = this.authService.getCurrentUser(); 
         console.log('Logged-in username:', this.username);
       } else {
@@ -30,6 +31,13 @@ export class NavBarComponent implements OnInit {
       }
     });
   }
+
+  // ngOnInit(): void {
+  //   this.authService.isAuthenticated$.subscribe((status) => {
+  //     this.isAuthenticated = status;
+  //     console.log('nav-bar: isAuthenticated:', status);
+  //   });
+  // }
 
   signOut(): void {
     this.authService.setAuthenticated(false); 

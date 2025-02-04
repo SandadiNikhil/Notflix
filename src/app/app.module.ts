@@ -15,7 +15,7 @@ import { YouTubePlayer } from '@angular/youtube-player';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './core/services/authentication/auth.service';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/guards/auth.guard';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';

@@ -44,7 +44,7 @@ export class MovieService {
 
   // Example of adding JWT token to headers (will be used after login)
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('jwt_token'); // Or get it from your auth service
+    const token = localStorage.getItem('jwt_token'); 
     return new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -92,7 +92,6 @@ export class MovieService {
     this.http
       .get<MovieResponse>(url)
       .pipe(
-        // tap((res) => this.moviesSubject$.next(res.results)),
         tap((res) => {
           const currentMovies = this.moviesSubject$.value; 
           const updatedMovies = [...currentMovies, ...res.results];
@@ -103,8 +102,8 @@ export class MovieService {
       .subscribe(() => this.loadingSubject$.next(false));
   }
 
-  getMovieDetails(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}`);
+  getMovieDetails(id: number): Observable<movieDetails> {
+    return this.http.get<movieDetails>(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}`);
   }
   
   getCastDetails(id: number): Observable<any> {
@@ -120,9 +119,7 @@ export class MovieService {
   getVideo(id: number): Observable<any> {
     this.loadingSubject$.next(true);
     this.errorSubject$.next(null);
-
     const url = `${this.baseUrl}movie/${id}/videos?api_key=${this.apiKey}`;
-
     return this.http.get(url).pipe(
       catchError((error) => this.handleError(error)),
       finalize(() => this.loadingSubject$.next(false))
@@ -170,11 +167,13 @@ export class MovieService {
     return this.http.post<AuthResponse>(`${this.authServerPath}/signup`, this.signupData).pipe(
       tap((response) => {
         this.storeToken(response.accessToken); 
+
         const decodedToken: any = jwtDecode(response.accessToken);
         this.currentUser = decodedToken.username;
+
         this.storeUsername(this.currentUser);
         console.log('Signup successful');
-        this.router.navigate(['/home']); 
+        this.router.navigate(['/movieList']); 
       }),
       catchError((error) => {
         console.error('Error in signup:', error);
@@ -183,6 +182,14 @@ export class MovieService {
     );
   }
 
+  // setUserRole(role: string) {
+  //   localStorage.setItem('user_role', role);
+  // }
   
-
+  // getUserRole(): string {
+  //   if (!this.currentRole) {
+  //     this.currentRole = localStorage.getItem('user_role') || 'User';
+  //   }
+  //   return this.currentRole;
+  // }
 }

@@ -1,0 +1,74 @@
+<div class="background-container">
+  <div class="step-container">
+    
+    <h1>Change to the plan that's right for you</h1>
+    <ul class="plan-features">
+      <li>✔ Watch all you want. Ad-free.</li>
+      <li>✔ Recommendations just for you.</li>
+      <li>✔ Change or cancel your plan anytime.</li>
+    </ul>
+
+    <table class="plan-table">
+      <tr>
+        <th></th>
+        <th>
+          <div class="plan-button-container">
+            <button
+              class="plan-header"
+              [ngClass]="{ 'selected': selectedRole === 'Basic' }"
+              (click)="selectPlan('Basic')" >
+              Basic
+            </button>
+          </div>
+        </th>
+        <th>
+          <div class="plan-button-container">
+            <button
+              class="plan-header"
+              [ngClass]="{ 'selected': selectedRole === 'Standard' }"
+              (click)="selectPlan('Standard')" >
+              Standard
+            </button>
+          </div>
+        </th>
+        <th>
+          <div class="plan-button-container">
+            <button
+              class="plan-header"
+              [ngClass]="{ 'selected': selectedRole === 'Premium' }"
+              (click)="selectPlan('Premium')">
+              Premium
+            </button>
+          </div>
+        </th>
+      </tr>
+      
+      <tr>
+        <td>Monthly Price</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Basic' }">$9.99</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Standard' }">$15.49</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Premium' }">$19.99</td>
+      </tr>
+      <tr>
+        <td>Video Quality</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Basic' }">Good</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Standard' }">Better</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Premium' }">Best</td>
+      </tr>
+      <tr>
+        <td>Resolution</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Basic' }">480p</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Standard' }">1080p</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Premium' }">4K + HDR</td>
+      </tr>
+      <tr>
+        <td>Watch on your TV, computer, mobile phone, and tablet</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Basic' }">✔</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Standard' }">✔</td>
+        <td [ngClass]="{ 'selected-column': selectedRole === 'Premium' }">✔</td>
+      </tr>
+    </table>
+
+    <button mat-raised-button color="warn" class="next-button" (click)="submit()">Next</button>
+  </div>
+</div>

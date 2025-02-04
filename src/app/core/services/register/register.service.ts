@@ -5,8 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class RegisterService {
-  // The multi-step form data across all pages
-  private formData = new BehaviorSubject<any>({
+  private formData = new BehaviorSubject({
     email: '',
     password: '',
     username: '',

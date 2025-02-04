@@ -32,7 +32,17 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  onLogoClick(event: Event): void {
+    event.preventDefault(); 
+    if (this.isAuthenticated) {
+      this.router.navigate(['/movieList']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+  }
+
   signOut(): void {
+    this.authService.logout();
     this.authService.setAuthenticated(false); 
     this.authService.addSignupData('email', '');
     this.authService.addSignupData('password', '');

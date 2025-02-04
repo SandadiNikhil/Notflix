@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, map, catchError, throwError, tap } from 'rxjs';
@@ -8,6 +8,7 @@ import { AuthResponse } from '../../interfaces/movie';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   private signupData: { [key: string]: string } = {};
   
@@ -19,8 +20,16 @@ export class AuthService {
   private currentUser: string | null = null;
   private currentUserRole: string = localStorage.getItem('user_role') || 'User';
 
-  constructor(private http: HttpClient, private router: Router) {}
-
+  constructor(private http: HttpClient, private router: Router) {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      this.isAuthenticatedSubject.next(true);
+      const storedUser = localStorage.getItem('current_user');
+      this.currentUser = storedUser || null;
+      this.currentUserRole = localStorage.getItem('user_role') || 'User';
+    }
+  }
+  
   addSignupData(key: string, value: any): void {
     this.signupData[key] = value;
     sessionStorage.setItem(key, value); 
@@ -31,11 +40,18 @@ export class AuthService {
   }
 
   getCurrentUser(): string | null {
-    if (!this.currentUser) {
-      this.currentUser = localStorage.getItem('current_user');
+    if (!this.isAuthenticatedSubject.getValue()) {
+      return null;
     }
-    return this.currentUser;
+    return localStorage.getItem('current_user');
   }
+
+  getUserRole(): string {
+    if (!this.isAuthenticatedSubject.getValue()) {
+        return 'User';
+    }
+    return localStorage.getItem('user_role') || 'User';
+}
 
   signup(): Observable<any> {
     const body = {
@@ -45,16 +61,19 @@ export class AuthService {
       tmdbKey: this.getSignupData('tmdb'),
       plan: this.getSignupData('plan'),
     };
+
     console.log('Signup body:', body);
     return this.http.post(`${this.authServerPath}/signup`, body).pipe(
       tap((response: any) => {
         console.log('Signup response:', response);
         console.log('Signup successful');
+        
         this.currentUser = body.username;
         this.storeUsername(this.currentUser);
         this.setUserRole(response.role);
         this.router.navigate(['/login']);
       }),
+
       catchError((error: HttpErrorResponse) => {
         console.error('Error during signup:', error);
         return throwError(() => new Error('Signup failed! Please try again.'));
@@ -73,8 +92,8 @@ export class AuthService {
         this.currentUser = decodedToken.username;
         this.storeUsername(this.currentUser);
         this.setAuthenticated(true);
+        this.isAuthenticatedSubject.next(true);
 
-        console.log('Login successful', response);
         this.router.navigate(['/movieList']); 
       }),
       catchError((error) => {
@@ -83,10 +102,6 @@ export class AuthService {
       })
     );
   }  
-
-  public getUserRole(): string {
-    return this.currentUserRole;
-  }
 
   private storeToken(token: string) {
     localStorage.setItem('access_token', token);
@@ -114,22 +129,32 @@ export class AuthService {
   }
 
   logout(): void {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_role');
+    localStorage.removeItem('current_user');
+    sessionStorage.clear();
+
     localStorage.clear();
     this.isAuthenticatedSubject.next(false);
-    sessionStorage.clear();
-    this.router.navigate(['/login']);
+
+    this.currentUser = null;
+    this.currentUserRole = 'User';
+
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 
-  public updateUserCredentials(newCredentials: Partial<{ email: string; password: string; username: string; role: string }>): Observable<any> {
-    return this.http.patch(`${this.authServerPath}/userupdate`, newCredentials).pipe(
+  public updateUserCredentials(newCredentials: Partial<{ email: string; password: string; username: string; role: string }>): Observable<any>
+  {
+    const token = localStorage.getItem('access_token');
+    const headers = token ? new HttpHeaders({ 'Authorization': token }) : undefined;
+
+    return this.http.patch(`${this.authServerPath}/userupdate`, newCredentials, { headers }).pipe(
       tap((response: any) => {
         console.log('User credentials updated successfully', response);
-        if (response.role) {
-          this.setUserRole(response.role);
-        }
-        if (response.accessToken) {
-          this.storeToken(response.accessToken);
-        }
+        if (response.role) { this.setUserRole(response.role); }
+        if (response.accessToken) { this.storeToken(response.accessToken); }
       }),
       catchError((error: HttpErrorResponse) => {
         console.error('Failed to update user credentials', error);

@@ -11,11 +11,12 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/authentication/auth.service';
 import { loginValidator } from '../../core/services/email/login-validator.service';
+import { FooterComponent } from '../../core/components/footer/footer.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, FooterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

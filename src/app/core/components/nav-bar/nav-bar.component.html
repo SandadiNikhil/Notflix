@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="logo">
-    <a [routerLink]="isAuthenticated ? '/movieList' : '/home'">
+    <a href="#" (click)="onLogoClick($event)">
       <img src="/assets/home/notflix.png" alt="Netflix Logo" />
     </a>
   </div>

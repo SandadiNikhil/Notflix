@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { Router, RouterModule } from '@angular/router';
 import { MovieService } from '../../../core/services/movie.service';
+import { FooterComponent } from "../../../core/components/footer/footer.component";
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,8 @@ import { MovieService } from '../../../core/services/movie.service';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-  ],
+    FooterComponent
+],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })

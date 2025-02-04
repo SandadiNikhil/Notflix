@@ -12,10 +12,11 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    list-style: none;
   }
 
   .item {
-    flex: 0 1 calc(5% - 20px); 
+    flex: 0 1 calc(20% - 20px); 
     margin: 1px; 
   }
 
@@ -24,5 +25,4 @@
     min-height: 100vh;
     padding: 20px; 
     margin-bottom: 20px;
-
   }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (click)="movieDetails(movie)">
   <div *ngIf="loading" class="spinner">Loading...</div>
   <ng-container *ngIf="!loading">
     <div
@@ -13,14 +13,13 @@
       <div class="content">
         <span class="tag year">{{ movie.release_date | date : "yyyy" }}</span>
         <span class="tag lang">{{ movie.original_language | uppercase }}</span>
-        <span class="tag rating">{{ movie.vote_average | number: '1.2-2' }}</span>
-
+        <span class="tag rating">{{ movie.vote_average | number: '1.0-1' }}</span>
       </div>
-
       <p class="overview">{{ movie.overview }}</p>
-      <button (click)="movieDetails(movie)" class="details-btn">
+      
+      <!-- <button (click)="movieDetails(movie)" class="details-btn">
         More Details..
-      </button>
+      </button> -->
     </div>
 
   </ng-container>

@@ -32,7 +32,6 @@ export class MovieListComponent implements OnInit {
     this.movies$ = this.movieService.movies$;
     this.loading$ = this.movieService.loading$;
     this.error$ = this.movieService.error$;
-    
   }
 
   ngOnInit(): void {

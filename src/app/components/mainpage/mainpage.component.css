@@ -32,17 +32,19 @@
   display: flex;
   align-items: center;
   color: white;
-  padding: 10px 300px;
+  padding: 10px;
   gap: 15px;
   width: 100%;
   justify-content: center;
-  max-width: 400px;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
 .content form input {
-  padding: 10px;
+  flex: 1;
+  min-width: 250px;
+  padding: 12px;
   font-size: 16px;
-  width: 300px;
   margin-right: 10px;
   border: 1px solid white;
   border-radius: 4px;
@@ -51,6 +53,7 @@
 }
 
 .content form button {
+  flex-shrink: 0;
   padding: 12px;
   font-size: 18px;
   background-color: #e50914;

@@ -16,12 +16,6 @@ export class MovieItemComponent {
   @Input() loading: boolean = false;
   constructor(private router: Router) {}
 
-  // movieDetails(movie: Result | Movie) {
-  //   // this.router.navigate(['/movieDetails'], { queryParams: { id: movie.id } });
-  //   this.loading = true;
-  //   this.router.navigate(['/movieDetails', movie.id]); 
-  // }
-
   movieDetails(movie: Result | Movie) {
     this.loading = true; 
     setTimeout(() => {

@@ -12,8 +12,6 @@ export class MainpageComponent {
   constructor(private router: Router) {}
 
   navigateToRegister(email: string) {
-  //   event.preventDefault();
-  //   console.log('Navigating to /register');
   this.router.navigate(['/register'], { queryParams: { email } });
  }
 }

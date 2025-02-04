@@ -75,7 +75,7 @@ export class AuthService {
         this.setAuthenticated(true);
 
         console.log('Login successful', response);
-        this.router.navigate(['/movieList']);  // Ensure route is correct
+        this.router.navigate(['/movieList']); 
       }),
       catchError((error) => {
         console.error('Error in login:', error);
@@ -139,71 +139,3 @@ export class AuthService {
   }
 
 }
-
-
-
-
-
-
-
-// import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { BehaviorSubject, Observable, map, catchError, throwError } from 'rxjs';
-
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-
-// export class AuthService {
-//     private userRole: string = localStorage.getItem('user_role') || 'User';
-//     private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-//     public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-//     //private isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-//     constructor(private http: HttpClient, private router: Router) {}
-  
-//     public setUserRole(role: string | null): void {
-//         this.userRole = role || 'User';
-//         if (role) { localStorage.setItem('user_role', role); }   
-//         else { localStorage.removeItem('user_role'); }
-//     }
-  
-//     public getUserRole(): string | null {
-//         return this.userRole;
-//     }
-
-//     public setAuthenticated(isAuthenticated: boolean): void {
-//         this.isAuthenticatedSubject.next(isAuthenticated);
-//     }
-
-//     // isAuthenticated$(): Observable<boolean> {
-//     //     return this.isAuthenticated.asObservable();
-//     // }
-
-//     login(email: string, password: string): Observable<any> {
-//         const url = 'http://localhost:5566/api/v1/auth/login'; 
-//         return this.http.post(url, { email, password }).pipe(
-//           map((response: any) => {
-//             localStorage.setItem('access_token', response.accessToken);
-//             this.setUserRole(response.role); 
-//             this.setAuthenticated(true);
-//             return response;
-//           }),
-//           catchError((error: HttpErrorResponse) => {
-//             this.setAuthenticated(false);
-//             return throwError(() => new Error('Login failed'));
-//           })
-//         );
-//     }
-    
-//     public logout(): void {
-//         this.setUserRole(null);
-//         this.setAuthenticated(false);
-//         this.router.navigate(['/login']);
-//         localStorage.removeItem('access_token');
-//         localStorage.removeItem('user_role');
-//         this.router.navigate(['/login']);
-//     }
-// }

@@ -25,15 +25,7 @@ import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 
 @NgModule({
 
-  declarations: [
-    AppComponent,
-    // LoginComponent,
-    // MainpageComponent,
-    // MovieItemComponent,
-    // MovieListComponent,
-    // MovieDetailsComponent,
-    // NavBarComponent,
-  ],
+  declarations: [ AppComponent],
 
   imports: [
     BrowserModule,
@@ -54,7 +46,6 @@ import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
     NavBarComponent,
     CoreModule,
     RouterModule,
-    // MainpageComponent,
     ],
     
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

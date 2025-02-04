@@ -9,14 +9,6 @@ export function loginValidator(http: HttpClient): AsyncValidatorFn {
       return of(null);
     }
 
-    // return http.get<{ exists: boolean }>(`/api/v1/auth/check-email?email=${email}`).pipe(
-    //   map(response => {
-    //     return response.exists ? { emailExists: true } : null;
-    //   }),
-    //   catchError(() => of(null))
-    // );
-
-
     return of(email).pipe(
       debounceTime(100),
       switchMap(() =>

@@ -32,13 +32,6 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  // ngOnInit(): void {
-  //   this.authService.isAuthenticated$.subscribe((status) => {
-  //     this.isAuthenticated = status;
-  //     console.log('nav-bar: isAuthenticated:', status);
-  //   });
-  // }
-
   signOut(): void {
     this.authService.setAuthenticated(false); 
     this.authService.addSignupData('email', '');

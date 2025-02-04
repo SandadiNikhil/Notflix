@@ -42,7 +42,6 @@ export class MovieService {
     this.loadCurrentUser();
   }
 
-  // Example of adding JWT token to headers (will be used after login)
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('jwt_token'); 
     return new HttpHeaders({
@@ -130,12 +129,11 @@ export class MovieService {
     let errorMessage = 'An unknown error occurred!';
 
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    
     this.errorSubject$.next(errorMessage);
     this.loadingSubject$.next(false);
     return throwError(() => new Error(errorMessage));
@@ -182,14 +180,4 @@ export class MovieService {
     );
   }
 
-  // setUserRole(role: string) {
-  //   localStorage.setItem('user_role', role);
-  // }
-  
-  // getUserRole(): string {
-  //   if (!this.currentRole) {
-  //     this.currentRole = localStorage.getItem('user_role') || 'User';
-  //   }
-  //   return this.currentRole;
-  // }
 }

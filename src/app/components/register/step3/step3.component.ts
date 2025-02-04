@@ -30,7 +30,7 @@ export class Step3Component {
 
   constructor(
     private registerService: RegisterService,
-    private movieService: MovieService, // If using your old code from MovieService
+    private movieService: MovieService, 
     private router: Router
   ) {}
 
@@ -39,20 +39,12 @@ export class Step3Component {
 }
   submit() {
     if (!this.selectedPlan) {
-      // maybe show an error or block submission
       return;
     }
 
-    // 1) Merge plan selection into the form data
     this.registerService.updateFormData({ plan: this.selectedPlan });
 
-    // 2) Retrieve all form data from Steps 1 + 2 + 3
     const finalData = this.registerService.getFormData();
-
-    // 3) Integrate old signup logic from your "old code"
-    // e.g., if your old approach was:
-    // this.movieService.signupData = finalData; 
-    // this.movieService.signup().subscribe(...);
 
     this.movieService.signupData = {
       email: finalData.email,
@@ -62,16 +54,13 @@ export class Step3Component {
       plan: finalData.plan
     };
 
-    // 4) Actually call signup to the backend
     this.movieService.signup().subscribe({
       next: (res) => {
         console.log('Signu completed:', res);
-        // Possibly route to success page
         this.router.navigate(['/success']);
       },
       error: (err) => {
         console.error('Signup failed', err);
-        // Show an error message or handle as needed
       },
     });
   }

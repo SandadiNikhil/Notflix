@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
-import { stepGuard } from './step.guard';
+import { StepGuard} from './step.guard';
 
 describe('stepGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => stepGuard(...guardParameters));
+      TestBed.runInInjectionContext(() => StepGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

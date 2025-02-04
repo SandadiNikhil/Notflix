@@ -94,4 +94,42 @@
   .next-button:hover {
     background-color: #b20710;
   }
+
+  .next-button {
+    margin-bottom: 40px; 
+  }
   
+
+  footer {
+    background-color: rgba(20, 20, 20, 0.9); 
+    color: #b3b3b3;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    position: relative; 
+    bottom: 0;
+    width: 100%;
+    z-index: 10; 
+  }
+  
+  .footer-content {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .footer-links a {
+    color: #b3b3b3;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }

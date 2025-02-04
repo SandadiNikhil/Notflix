@@ -2,6 +2,7 @@
   <div class="login-card">
     <p class="login-title">Sign In</p>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
       <div class="form-group">
         <input
           type="email"
@@ -16,9 +17,7 @@
           *ngIf="!email?.valid && (email?.touched || email?.dirty)"
         >
           <div [hidden]="!email?.errors?.['required']">Email is required</div>
-          <div [hidden]="!email?.errors?.['minlength']">
-            Minimum length is 6
-          </div>
+          <div [hidden]="!email?.errors?.['email']">Invalid email format</div>
         </div>
       </div>
 
@@ -42,11 +41,16 @@
       
       <div class="extra-options">
         <a href="#" class="help-link">Forgot your password?</a>
+        <a href="#" class="help-link">Need Help?</a>
       </div>
+      <div class="signup-text">
+        New to Netflix? <a href="/register" class="signup-link">Signup now.</a>
+    </div>
 
     </form>
+
   </div>
 </div>
 
-<!-- <app-footer></app-footer> -->
+<app-footer></app-footer>
 

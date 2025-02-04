@@ -2,23 +2,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
-    width: 100%;
-
     min-height: 100vh;
-    /* background: red; */
+    width: 100%;
     background: url('/assets/netflix.jpg') center/ cover no-repeat;  
     position: relative; 
     color: white;
-  
+    flex-direction: column;
   }
   
   .login-card {
     padding: 40px;
-    padding-bottom: 120px;
+    padding-bottom: 80px;
     width: 320px;
-    height: 60%;
+    height: 100%;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent background */
+    border-radius: 7px; 
   }
   
   .login-title {
@@ -95,8 +94,9 @@
   
   .extra-options {
     margin-top: 20px;
-    text-align: center;
     font-size: 14px;
+    display: flex;
+    justify-content: space-between;
   }
   
   .help-link,
@@ -111,7 +111,9 @@
   }
   
   .signup-text {
-    margin-top: 10px;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 16px;
     color: white
   }
   

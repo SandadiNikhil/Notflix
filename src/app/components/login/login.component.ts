@@ -49,6 +49,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
       const { email, pwd } = this.loginForm.value;
 
